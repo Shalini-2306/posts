@@ -110,7 +110,7 @@
 				@foreach($posts as $post)
                 <div class="links">
                    <p><b>{{$post->title}}</b></p>
-                   <p><b>Posted On: {{$post->created_at}}</b></p>
+                   <p><b>Posted On: {{date('D, jS M y, g:i A', strtotime($post->created_at))}}</b></p>
                    <p>{{$post->description}}</p>
                 </div>
                 <hr>
