@@ -15,9 +15,10 @@
     //~ return view('welcome');
 //~ });
 Route::get('/', 'PostController@index');
-Route::post('create-post', 'PostController@store');
+Route::get('/{cat_id}/{cat_name}', 'PostController@show');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::post('create-post', 'PostController@store');

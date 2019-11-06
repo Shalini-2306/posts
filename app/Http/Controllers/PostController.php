@@ -7,6 +7,7 @@ use App\Post;
 use App\Category;
 use App\User;
 use App\Role;
+use Auth;
 class PostController extends Controller
 {
     /**
@@ -17,7 +18,16 @@ class PostController extends Controller
     public function index()
     {
         $posts =Post::get();
-        return view('index')->with('posts', $posts);
+        $category=array();
+		$categories=Category::get();
+		if(count($categories)>0)
+		{
+			foreach($categories as $cat)
+			{
+				$category[$cat->id]=$cat->name;
+			}
+		}
+        return view('index')->with('posts', $posts)->with('category', $category);
     }
 
     /**
@@ -28,6 +38,7 @@ class PostController extends Controller
     public function create()
     {
         //
+        
     }
 
     /**
@@ -38,7 +49,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post=new Post;
+        $post->user_id=Auth::user()->id;
+        $post->category_id=$request->category;
+        $post->title=$request->title;
+        $post->description=$request->description;
+        $post->save();
+        return redirect('home');
     }
 
     /**
@@ -47,9 +64,16 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, $name)
     {
-        //
+		$posts=Post::where('category_id', $id)->get();
+		$cat=Category::find($id);
+		$catName='';
+		if(!empty($cat))
+		{
+			$catName=$cat->name;
+		}
+       return view('show')->with('posts', $posts)->with('catName', $catName);
     }
 
     /**

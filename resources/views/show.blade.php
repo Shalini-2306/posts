@@ -67,43 +67,17 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+            
+                        <a href="{{ URL::to('/') }}">Home</a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                    
                     
                 </div>
-            @endif
-			 </div>
+            
 			 <div class="position-ref padd">
             <div class="content">
-				<ul class="navbar-nav ml-auto">
-                     <li class="nav-item dropdown">
-						<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-							Categories <span class="caret"></span>
-						</a>
-						@if(count($category)>0)
-						@foreach($category as $k => $v)
-						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="{{ URL::to($k.'/'.$v) }}">
-								{{ $v }}
-							</a>
-
-						</div>
-						@endforeach
-						@endif
-					</li>
-					</ul>
+				
                 <div class="title m-b-md">
-                    Posts:
+                    {{$catName}} Posts:
                 </div>
                 @if(isset($posts))
 				@if(count($posts)>0)

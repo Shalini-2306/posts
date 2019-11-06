@@ -16,8 +16,9 @@
 
                     
                     <br/>
+                    @if($role !='' && ($role ==='Admin' || $role==='Author'))
                     <h2>Add Post:</h2>
-                     <form method="POST" action="{{ route('create-post') }}">
+                     <form method="POST" action="{{ URL::to('create-post') }}">
                         @csrf
 						<div class="form-group row">
                             <label for="category" class="col-md-4 col-form-label text-md-right">{{ __('Select Category') }}</label>
@@ -58,6 +59,7 @@
                             </div>
                         </div>
                        </form>
+                       @endif
                 </div>
             </div>
         </div>
